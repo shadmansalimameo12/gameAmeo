@@ -7,48 +7,44 @@ import DoctorDetails from "../Pages/DoctorDetails";
 import ContactUs from "../Pages/ContactUs";
 import Blogs from "../Pages/Blogs";
 import ErrorPage from "../Pages/ErrorPage";
-import LoadingSpinner from "../Components/LoadingSpinner";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        Component: Mainlayout,
-        errorElement: ErrorPage,
+        element: <Mainlayout />,
+        errorElement: <ErrorPage />, // This should be completely separate from Mainlayout
         children: [
             {
                 index: true,
-                path: '/',
-                Component: Home,
-                
-                loader: async () => {
-                    const response = await fetch('../doctors.json');
-                    const data = await response.json();
-                    return data;
-                },
-                loading: LoadingSpinner,
-                errorElement: <ErrorPage></ErrorPage>,
+                element: <Home />,
+                loader: () => fetch('../doctors.json')
             },
             {
                 path: '/my-bookings',
-                Component: MyBooking,
+                element: <MyBooking />,
             },
             {
                 path: '/doctor-details/:id',
-                Component: DoctorDetails,
-                loader: async () => {
-                    const response = await fetch('../doctors.json');
-                    const data = await response.json();
-                    return data;
-                },
-                loading: LoadingSpinner
+                element: <DoctorDetails />,
+                loader: async ({ params }) => {
+                    const data = await fetch('../doctors.json').then(res => res.json())
+                    const doctor = data.find(doc => doc.id === parseInt(params.id))
+                    
+                    // Throw error if doctor not found
+                    if (!doctor) {
+                        throw new Response("Doctor not found", { status: 404 })
+                    }
+                    
+                    return data
+                }
             },
             {
                 path: '/contact-us',
-                Component: ContactUs,
+                element: <ContactUs />,
             },
             {
                 path: '/blogs',
-                Component: Blogs
+                element: <Blogs />
             }
         ]
     }
