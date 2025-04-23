@@ -7,6 +7,7 @@ import DoctorDetails from "../Pages/DoctorDetails";
 import ContactUs from "../Pages/ContactUs";
 import Blogs from "../Pages/Blogs";
 import ErrorPage from "../Pages/ErrorPage";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 export const router = createBrowserRouter([
     {
@@ -18,16 +19,28 @@ export const router = createBrowserRouter([
                 index: true,
                 path: '/',
                 Component: Home,
-                loader: () => fetch('../doctors.json')
+                
+                loader: async () => {
+                    const response = await fetch('../doctors.json');
+                    const data = await response.json();
+                    return data;
+                },
+                loading: LoadingSpinner,
+                errorElement: <ErrorPage></ErrorPage>,
             },
             {
                 path: '/my-bookings',
-                Component : MyBooking,
+                Component: MyBooking,
             },
             {
                 path: '/doctor-details/:id',
                 Component: DoctorDetails,
-                loader: () => fetch('../doctors.json')
+                loader: async () => {
+                    const response = await fetch('../doctors.json');
+                    const data = await response.json();
+                    return data;
+                },
+                loading: LoadingSpinner
             },
             {
                 path: '/contact-us',
@@ -35,10 +48,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/blogs',
-                Component:  Blogs
+                Component: Blogs
             }
-
         ]
     }
-
 ]);

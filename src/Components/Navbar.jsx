@@ -4,6 +4,7 @@ import logo from '../assets/logo.png';
 
 
 
+
 const Navbar = () => {
     return (
         <div className='w-11/12 mx-auto'>

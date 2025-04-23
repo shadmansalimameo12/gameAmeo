@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import LoadingSpinner from '../Components/LoadingSpinner';
 
 const DoctorDetails = () => {
     const data = useLoaderData();
     const { id } = useParams();
     const navigate = useNavigate();
     const [isBooked, setIsBooked] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [singleDoctor, setSingleDoctor] = useState(null);
     
-    const singleDoctor = data.find(doc => doc.id === parseInt(id));
+    // Find the doctor and set loading state
+    useEffect(() => {
+        if (data) {
+            const doctor = data.find(doc => doc.id === parseInt(id));
+            setSingleDoctor(doctor);
+            setLoading(false);
+        }
+    }, [data, id]);
     
     // Check if doctor is already booked
     useEffect(() => {
-        const bookedDoctors = JSON.parse(localStorage.getItem('bookedDoctors')) || [];
-        const alreadyBooked = bookedDoctors.some(doctor => doctor.id === singleDoctor.id);
-        setIsBooked(alreadyBooked);
-    }, [singleDoctor.id]);
+        if (singleDoctor) {
+            const bookedDoctors = JSON.parse(localStorage.getItem('bookedDoctors')) || [];
+            const alreadyBooked = bookedDoctors.some(doctor => doctor.id === singleDoctor.id);
+            setIsBooked(alreadyBooked);
+        }
+    }, [singleDoctor]);
 
     const handleBookAppointment = () => {
         // Get existing booked doctors from localStorage
@@ -59,6 +71,10 @@ const DoctorDetails = () => {
         // Update booking status
         setIsBooked(false);
     };
+
+    if (loading) {
+        return <LoadingSpinner />;
+    }
 
     return (
         <div className="card card-side bg-base-100 shadow-sm w-2/3 mx-auto p-10 my-8">
