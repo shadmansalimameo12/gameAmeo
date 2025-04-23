@@ -1,9 +1,6 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
-
-
-
 
 const Navbar = () => {
     return (
@@ -21,8 +18,6 @@ const Navbar = () => {
                             <NavLink className={({isActive}) => isActive? 'font-bold underline' : ''} to= '/my-bookings'> <li>My-Bookings</li> </NavLink>
                             <NavLink className={({isActive}) => isActive? 'font-bold underline' : ''} to='/blogs' > <li>Blogs</li> </NavLink>
                             <NavLink className={({isActive}) => isActive? 'font-bold underline' : ''} to= 'contact-us'> <li>Contact Us</li> </NavLink>
-
-
                         </ul>
                     </div>
                     <img className='w-8' src={logo} alt="" />
@@ -35,7 +30,6 @@ const Navbar = () => {
                             <NavLink className={({isActive}) => isActive? 'font-bold underline' : ''} to= '/my-bookings'> <li>My-Bookings</li> </NavLink>
                             <NavLink className={({isActive}) => isActive? 'font-bold underline' : ''} to='/blogs' > <li>Blogs</li> </NavLink>
                             <NavLink className={({isActive}) => isActive? 'font-bold underline' : ''} to= 'contact-us'> <li>Contact Us</li> </NavLink>
-
                     </ul>
                 </div>
                 <div className="navbar-end">

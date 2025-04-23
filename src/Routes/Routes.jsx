@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../Pages/Home";
 import Mainlayout from "../Layouts/Mainlayout";
@@ -27,15 +27,26 @@ export const router = createBrowserRouter([
                 path: '/doctor-details/:id',
                 element: <DoctorDetails />,
                 loader: async ({ params }) => {
-                    const data = await fetch('../doctors.json').then(res => res.json())
-                    const doctor = data.find(doc => doc.id === parseInt(params.id))
-                    
-                    // Throw error if doctor not found
-                    if (!doctor) {
-                        throw new Response("Doctor not found", { status: 404 })
+                    try {
+                        const data = await fetch('../doctors.json').then(res => res.json());
+                        
+                        // Check if id is a valid integer (no extra characters)
+                        if (!/^\d+$/.test(params.id)) {
+                            throw new Response("Invalid doctor ID format", { status: 404 });
+                        }
+
+                        const doctorId = parseInt(params.id);
+                        const doctor = data.find(doc => doc.id === doctorId);
+                        
+                        // Throw error if doctor not found
+                        if (!doctor) {
+                            throw new Response("Doctor not found", { status: 404 });
+                        }
+                        
+                        return data;
+                    } catch (error) {
+                        throw new Response("Doctor not found", { status: 404 });
                     }
-                    
-                    return data
                 }
             },
             {

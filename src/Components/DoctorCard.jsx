@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
-
+import { Link } from 'react-router-dom';
 
 const DoctorCard = ({doctor}) => {
     return (
-        <div>
-            <div className=" bg-base-100 shadow-sm">
+        <div className='p-6'>
+            <div className=" bg-base-100 shadow-sm p-10 rounded-2xl ">
                 <figure className="px-10 pt-10">
                     <img 
                         src={doctor.image}

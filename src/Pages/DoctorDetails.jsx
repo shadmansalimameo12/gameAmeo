@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData, useParams, useNavigate } from 'react-router';
+import { useLoaderData, useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../Components/LoadingSpinner';
 
@@ -15,10 +15,15 @@ const DoctorDetails = () => {
     useEffect(() => {
         if (data) {
             const doctor = data.find(doc => doc.id === parseInt(id));
+            if (!doctor) {
+                // If no doctor is found, throw a 404 error
+                navigate('/not-found', { replace: true });
+                return;
+            }
             setSingleDoctor(doctor);
             setLoading(false);
         }
-    }, [data, id]);
+    }, [data, id, navigate]);
     
     // Check if doctor is already booked
     useEffect(() => {

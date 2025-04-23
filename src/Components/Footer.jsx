@@ -1,25 +1,20 @@
 import React from 'react';
 import { FaFacebook } from "react-icons/fa";
 import logo from '../assets/logo.png';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router-dom';
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
-
-
 
 const Footer = () => {
   return (
     <div className=''>
       <footer className="footer footer-horizontal footer-center text-primary-content p-10">
         <aside>
-
-
           <div className='flex'>
             <img className='w-8' src={logo} alt="" />
             <a className="text-xl text-black">Phudu</a>
           </div>
-
 
           <div className="navbar-center hidden lg:flex text-black">
             <ul className="menu menu-horizontal px-1 gap-4">
@@ -27,10 +22,8 @@ const Footer = () => {
               <NavLink className={({ isActive }) => isActive ? 'font-bold underline' : ''} to='/my-bookings'> <li>My-Bookings</li> </NavLink>
               <NavLink className={({ isActive }) => isActive ? 'font-bold underline' : ''} to='/blogs' > <li>Blogs</li> </NavLink>
               <NavLink className={({ isActive }) => isActive ? 'font-bold underline' : ''} to='contact-us'> <li>Contact Us</li> </NavLink>
-
             </ul>
           </div>
-
         </aside>
         <nav>
           <div className="grid grid-flow-col gap-4 text-black">
