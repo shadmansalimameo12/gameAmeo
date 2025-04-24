@@ -10,12 +10,19 @@ const MyBooking = () => {
 
     // Load booked doctors from localStorage on component mount
     useEffect(() => {
-        // Simulate network delay to show the loader
-        setTimeout(() => {
-            const storedBookings = JSON.parse(localStorage.getItem('bookedDoctors')) || [];
-            setBookedDoctors(storedBookings);
+        try {
+            // Add a specific delay to ensure loading state is visible
+            const timer = setTimeout(() => {
+                const storedBookings = JSON.parse(localStorage.getItem('bookedDoctors')) || [];
+                setBookedDoctors(storedBookings);
+                setLoading(false);
+            }, 600);
+            
+            return () => clearTimeout(timer);
+        } catch (error) {
+            console.error("Error loading bookings:", error);
             setLoading(false);
-        }, 800); // Using a slight delay to ensure the spinner is visible
+        }
     }, []);
 
     const handleCancelAppointment = (doctor) => {
@@ -37,7 +44,7 @@ const MyBooking = () => {
 
     // Prepare data for the chart - each doctor with their fee
     const chartData = bookedDoctors.map(doctor => ({
-        name: doctor.name.split(' ')[1], // Using last name for brevity
+        name: doctor.name.split(' ')[1] || doctor.name, // Using last name for brevity, fallback to full name
         fee: doctor.consultationFee
     }));
 
@@ -95,7 +102,7 @@ const MyBooking = () => {
                     </div>
 
                     {/* Appointments List */}
-                    <div className=" space-y-4">
+                    <div className="space-y-4">
                         {bookedDoctors.map((doctor) => (
                             <div key={doctor.id} className="card bg-base-100 shadow-lg">
                                 <div className="card-body flex flex-row items-center">

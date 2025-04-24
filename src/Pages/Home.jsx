@@ -7,13 +7,15 @@ import LoadingSpinner from '../Components/LoadingSpinner';
 const Home = () => {
     const data = useLoaderData();
     const [loading, setLoading] = useState(true);
-
-    
     
     useEffect(() => {
-        // Simulate checking if data is loaded
         if (data) {
-            setLoading(false);
+            // Add a small delay to ensure loading state is visible
+            const timer = setTimeout(() => {
+                setLoading(false);
+            }, 500);
+            
+            return () => clearTimeout(timer);
         }
     }, [data]);
     

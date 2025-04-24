@@ -14,13 +14,22 @@ const DoctorDetails = () => {
     // Find the doctor and set loading state
     useEffect(() => {
         if (data) {
-            const doctor = data.find(doc => doc.id === parseInt(id));
-            if (!doctor) {
+            try {
+                const doctor = data.find(doc => doc.id === parseInt(id));
+                if (!doctor) {
+                    throw new Error("Doctor not found");
+                }
+                setSingleDoctor(doctor);
+                
+                // Add a small delay to ensure loading state is visible
+                const timer = setTimeout(() => {
+                    setLoading(false);
+                }, 500);
+                
+                return () => clearTimeout(timer);
+            } catch (error) {
                 navigate('/not-found', { replace: true });
-                return;
             }
-            setSingleDoctor(doctor);
-            setLoading(false);
         }
     }, [data, id, navigate]);
     
@@ -67,7 +76,7 @@ const DoctorDetails = () => {
     return (
         <div>
             <div className='text-center pt-10'>
-                <h1 className='text-3xl font-bold'>Doctor’s Profile Details</h1>
+                <h1 className='text-3xl font-bold'>Doctor's Profile Details</h1>
                 <p className='text-gray-500'>
                     Health is not just about what you are eating, it's also about what you are thinking, saying, and doing. <br />
                     A peaceful mind leads to a healthy body.
