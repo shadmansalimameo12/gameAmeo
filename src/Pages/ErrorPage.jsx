@@ -29,12 +29,12 @@ const ErrorPage = () => {
     }
     
     return (
-        <div className="flex flex-col items-center justify-center bg-gray-100 p-4">
+        <div className="flex flex-col items-center justify-center bg-gray-100 p-6">
            
             <Navbar></Navbar>
             
            
-            <div className="bg-white p-8 rounded-lg shadow-md text-center w-full">
+            <div className="bg-white p-34 rounded-lg shadow-md text-center w-full min-h-[calc(100vh-300px)]">
           
                 <h1 className="text-5xl font-bold text-black mb-4">No Doctor Found</h1>
                 
@@ -64,7 +64,7 @@ const ErrorPage = () => {
             </div>
             
            
-            <Footer></Footer>
+           
         </div>
     );
 };
