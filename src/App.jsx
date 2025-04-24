@@ -8,7 +8,7 @@ function App() {
   return (
     <>
     <h1>navbar</h1>
-    <Outlet></Outlet>
+    {/* <Outlet></Outlet> */}
     <h1>footer</h1>
      
     </>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Bannerimg from '../assets/banner-img-1.png'
+import Bannerimg2 from '../assets/21.avif'
 
 const Hero = () => {
     return (
@@ -11,8 +12,8 @@ const Hero = () => {
                 <button className="btn btn-primary rounded-3xl w-28   ">search now</button>
             </div>
             <div className=' gap-4  flex justify-center py-6  ' >
-                <img src={Bannerimg} alt="" />
-                <img src={Bannerimg} alt="" />
+                <img className='object-cover rounded-2xl' src={Bannerimg} alt="" />
+                <img className='w-[32%] rounded-2xl' src={Bannerimg2} alt="" />
             </div>
 
 

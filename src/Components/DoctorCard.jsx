@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const DoctorCard = ({doctor}) => {
     return (
-        <div className='p-6'>
-            <div className=" bg-base-100 shadow-sm p-10 rounded-2xl ">
+        <div className='p-6 '>
+            <div className=" bg-base-100 shadow-sm rounded-2xl w-96 pb-8 ">
                 <figure className="px-10 pt-10">
                     <img 
                         src={doctor.image}

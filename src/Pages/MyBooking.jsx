@@ -95,7 +95,7 @@ const MyBooking = () => {
                     </div>
 
                     {/* Appointments List */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className=" space-y-4">
                         {bookedDoctors.map((doctor) => (
                             <div key={doctor.id} className="card bg-base-100 shadow-lg">
                                 <div className="card-body flex flex-row items-center">

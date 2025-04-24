@@ -83,6 +83,7 @@ const DoctorDetails = () => {
 
     return (
         <div className="card card-side bg-base-100 shadow-sm w-2/3 mx-auto p-10 my-8">
+            <h1></h1>
             <figure>
                 <img className='w-96' src={singleDoctor.image} alt="Doctor" />
             </figure>
